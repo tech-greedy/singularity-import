@@ -156,7 +156,7 @@ export default class ImportUtil {
     existingPath: string,
     dealId: string,
     options: ImportOptions) {
-    console.log(`Importing ${existingPath} with Deal ${dealId}`);
+    console.log(`[${dealId} Importing ${existingPath}`);
     try {
       if (!options.dryRun) {
         const response = await options.marketApiClient.call('BoostOfflineDealWithData', [dealId, path.resolve(existingPath)]);
@@ -167,7 +167,7 @@ export default class ImportUtil {
     } catch (e) {
       console.error(e);
       ImportUtil.knownBadDeals.add(dealId);
-      console.log(`Will no longer handle this deal: ${dealId}`);
+      console.log(`[${dealId} Will no longer handle this deal`);
     }
   }
 
@@ -230,7 +230,7 @@ export default class ImportUtil {
           await ImportUtil.importDeal(existingPath, deal.ID, options);
           await sleep(options.intervalSeconds * 1000);
         } catch (e) {
-          console.error(`Failed to import ${existingPath} for deal ${deal.ID}.`, e);
+          console.error(`[${deal.ID}] Failed to import ${existingPath}.`, e);
           ImportUtil.knownBadDeals.add(deal.ID);
         }
         continue;

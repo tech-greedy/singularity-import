@@ -30,7 +30,7 @@ program.option('-c, --client <addresses...>', 'List of client addresses to filte
     String, '1m')
   .option('-dc, --download-concurrency <concurrency>', 'This sets an upper limit of concurrent downloads', Number, 1)
   .option('-pc1, --max-pc1 <max_pc1>',
-    'The maximum number of PC1s to run concurrently, once reached, stop importing or downloading new deals. 0 for unlimited.', Number, 0)
+    '[Not implemented] The maximum number of PC1s to run concurrently, once reached, stop importing or downloading new deals. 0 for unlimited.', Number, 0)
   .option('-d, --dry-run', 'Do not import deals, just print the deals that would be imported or downloaded', false)
   .option('-l, --loop', 'Keep monitoring the incoming deals and perform the import indefinitely', false)
   .action(async (options: ImportOptions) => {
@@ -48,10 +48,8 @@ Example Usage:
   - Import all deals continuously one after another:
     $ singularity-import -p /path/to/car -i 0 -l
   - Import one deal every 20 minutes with multiple paths
-    $ singularity-import -p /path1/to/car -p /path2/to/car -i 1200 -l
-  - Import one deal every minute with up to 5 concurrent imports
-    $ singularity-import -p /path/to/car -i 60 -ic 5 -l
-  - Import deals from a specific client and the file can be downloaded from their HTTP server. Delete the file after importing.
-    $ singularity-import -c f1xxxx -u https://www.download.org/ -o ./downloads -i 0 -l -r
+    $ singularity-import -p /path1/to/car -p /path2/to/car -i 20m -l
+  - Import deals from a specific client and the file can be downloaded from their HTTP server. 
+    $ singularity-import -c f1xxxx -u https://www.download.org/{pieceCid}.car -o ./downloads -i 0 -l
 `);
 program.parse();

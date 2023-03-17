@@ -1,0 +1,55 @@
+{
+  "name": "@techgreedy/singularity-import",
+  "version": "0.0.1",
+  "description": "Automatically import deals to boost for Filecoin storage provider",
+  "main": "dist/singularity-import-boost.js",
+  "types": "dist/singularity-import-boost.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "chmod +x dist/singularity-import-boost.js",
+    "start": "ts-node-esm src/singularity-import-boost.ts",
+    "lint": "eslint --ext ts --fix src/",
+    "lint:nofix": "eslint --ext ts src/",
+    "markdownlint": "markdownlint-cli2-fix *.md",
+    "markdownlint:nofix": "markdownlint-cli2 *.md"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tech-greedy/singularity-import.git"
+  },
+  "keywords": [
+    "filecoin",
+    "singularity",
+    "import"
+  ],
+  "license": "(Apache-2.0 AND MIT)",
+  "bugs": {
+    "url": "https://github.com/tech-greedy/singularity-import/issues"
+  },
+  "homepage": "https://github.com/tech-greedy/singularity-import",
+  "devDependencies": {
+    "@types/node": "^18.15.3",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "eslint": "^8.36.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "markdownlint-cli2": "^0.6.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+  },
+  "author": "Xinan Xu",
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "singularity-import-boost": "dist/singularity-import-boost.js"
+  }
+}

@@ -79,8 +79,6 @@ export default class ImportUtil {
       console.warn('Dry run is enabled. No deals will be imported or downloaded.');
     }
 
-    console.log(options);
-
     options.marketApiClient = ImportUtil.resolveApiInfo(process.env.MARKETS_API_INFO!);
     options.boostGqlClient = new GraphQLClient(process.env.BOOST_GRAPHQL_ENDPOINT! + '/graphql/query',
       {

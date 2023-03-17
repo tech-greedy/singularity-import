@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import packageJson from '../package.json';
+import packageJson from '../package.json' assert { type: 'json' };
 import { Command } from 'commander';
 import ImportUtil from "./ImportUtil.js";
 import {ImportOptions} from "./Types.js";

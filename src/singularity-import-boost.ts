@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import ImportUtil from "./ImportUtil.js";
-import {ImportOptions} from "./Types.js";
+import ImportUtil from './ImportUtil.js';
+import { ImportOptions } from './Types.js';
 
 const program = new Command();
 program.name('singularity-import-boost')

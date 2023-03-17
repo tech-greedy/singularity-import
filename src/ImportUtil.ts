@@ -1,12 +1,12 @@
-import {BoostDeal, ImportOptions} from './Types.js';
+import { BoostDeal, ImportOptions } from './Types.js';
 import parse from 'parse-duration';
-import JsonRpcClient from "./JsonRpcClient.js";
-import {GraphQLClient, gql} from "graphql-request";
+import JsonRpcClient from './JsonRpcClient.js';
+import { GraphQLClient, gql } from 'graphql-request';
 import MultipartDownload from 'multipart-download';
 import fs from 'fs-extra';
 import path from 'path';
 import Semaphore from 'semaphore-async-await';
-import {CurrentTimestamp, HeightToTimestamp} from "./ChainHeight.js";
+import { CurrentTimestamp, HeightToTimestamp } from './ChainHeight.js';
 import retry from 'async-retry';
 
 function sleep (ms: number): Promise<void> {
@@ -18,7 +18,7 @@ export default class ImportUtil {
     throw new Error(message);
   }
 
-  private static resolveApiInfo (apiInfo: string, prefix: string = 'Filecoin.'): JsonRpcClient {
+  private static resolveApiInfo (apiInfo: string, prefix = 'Filecoin.'): JsonRpcClient {
     const [minerToken, minerApi] = apiInfo.split(':');
     let ip = minerApi.split('/')[2];
     if (ip === '0.0.0.0') {
@@ -34,8 +34,9 @@ export default class ImportUtil {
 
   private static parseDuration (duration: string): number {
     if (isNaN(Number(duration))) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      return parse(duration, 's')
+      return parse(duration, 's');
     } else {
       return Number(duration);
     }
@@ -57,13 +58,11 @@ export default class ImportUtil {
     }
 
     if (options.since) {
-      // @ts-ignore
       options.sinceSeconds = ImportUtil.parseDuration(options.since);
     } else {
       options.sinceSeconds = 30 * 86400;
     }
 
-    // @ts-ignore
     options.sealingDurationSeconds = ImportUtil.parseDuration(options.sealingDuration);
     if (options.sealingDurationSeconds < 4 * 3600) {
       ImportUtil.throwError('Sealing duration must be at least 4 hours.');
@@ -77,7 +76,6 @@ export default class ImportUtil {
       ImportUtil.throwError('If --url-template is specified, --download-folder must also be specified.');
     }
 
-    // @ts-ignore
     options.intervalSeconds = ImportUtil.parseDuration(options.interval);
     if (options.intervalSeconds < 0) {
       ImportUtil.throwError('Interval must be greater than 0.');
@@ -103,6 +101,7 @@ export default class ImportUtil {
 
   private static downloading: Set<string> = new Set<string>();
 
+  // eslint-disable-next-line new-cap
   private static downloadSemaphore : Semaphore.default = new Semaphore.default(1);
 
   public static async startImportLoop (options: ImportOptions) {
@@ -171,7 +170,7 @@ export default class ImportUtil {
     }
   }
 
-  private static async getDeals (options: ImportOptions) : Promise<BoostDeal[]>{
+  private static async getDeals (options: ImportOptions) : Promise<BoostDeal[]> {
     const query = gql`
     {
       deals(limit: 10000) {
@@ -180,7 +179,7 @@ export default class ImportUtil {
         }
       }
     }`;
-    const response = <any>await options.boostGqlClient.request(query);
+    const response = <any> await options.boostGqlClient.request(query);
     return response.deals.deals;
   }
 
@@ -252,18 +251,18 @@ export default class ImportUtil {
         .replace('{dataCid}', deal.DealDataRoot);
 
       retry(async () => {
-        await ImportUtil.download(url, pieceCidFile, options)
+        await ImportUtil.download(url, pieceCidFile, options);
       }, {
         retries: options.downloadRetries,
         minTimeout: 300000,
-        maxTimeout: 3600000,
+        maxTimeout: 3600000
       }).catch((e) => {
         console.error(`Failed to download ${url} to ${pieceCidFile} after ${options.downloadRetries} retries.`, e);
       }).then(async () => ImportUtil.importDeal(pieceCidFile, deal.ID, options))
         .catch((e) => {
-        console.error(`Failed to import ${pieceCidFile} for deal ${deal.ID}.`, e);
-        ImportUtil.knownBadDeals.add(deal.ID);
-      });
+          console.error(`Failed to import ${pieceCidFile} for deal ${deal.ID}.`, e);
+          ImportUtil.knownBadDeals.add(deal.ID);
+        });
     }
   }
 }

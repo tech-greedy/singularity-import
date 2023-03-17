@@ -29,7 +29,7 @@ export default class JsonRpcClient {
           id: 1,
           jsonrpc: '2.0',
           method: (this.prefix ?? '') + method,
-          params: params
+          params
         },
         this.config
       );

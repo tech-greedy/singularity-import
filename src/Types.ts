@@ -1,5 +1,5 @@
-import JsonRpcClient from "./JsonRpcClient.js";
-import {GraphQLClient} from "graphql-request";
+import JsonRpcClient from './JsonRpcClient.js';
+import { GraphQLClient } from 'graphql-request';
 
 export interface ImportOptions {
   client?: string[],

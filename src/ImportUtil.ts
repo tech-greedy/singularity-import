@@ -48,12 +48,14 @@ export default class ImportUtil {
     }
 
     if (options.since) {
-      options.sinceSeconds = parse.default(options.since, 's');
+      // @ts-ignore
+      options.sinceSeconds = parse(options.since, 's');
     } else {
       options.sinceSeconds = 30 * 86400;
     }
 
-    options.sealingDurationSeconds = parse.default(options.sealingDuration, 's');
+    // @ts-ignore
+    options.sealingDurationSeconds = parse(options.sealingDuration, 's');
     if (options.sealingDurationSeconds < 4 * 3600) {
       ImportUtil.throwError('Sealing duration must be at least 4 hours.');
     }
@@ -66,7 +68,8 @@ export default class ImportUtil {
       ImportUtil.throwError('If --url-template is specified, --download-folder must also be specified.');
     }
 
-    options.intervalSeconds = parse.default(options.interval, 's');
+    // @ts-ignore
+    options.intervalSeconds = parse(options.interval, 's');
     if (options.intervalSeconds < 0) {
       ImportUtil.throwError('Interval must be greater than 0.');
     }

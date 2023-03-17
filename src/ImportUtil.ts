@@ -91,7 +91,7 @@ export default class ImportUtil {
       console.warn('Dry run is enabled. No deals will be imported or downloaded.');
     }
 
-    options.marketApiClient = ImportUtil.resolveApiInfo(process.env.MARKETS_API_INFO!, 'Boost.');
+    options.marketApiClient = ImportUtil.resolveApiInfo(process.env.MARKETS_API_INFO!);
     options.boostGqlClient = new GraphQLClient(process.env.BOOST_GRAPHQL_ENDPOINT! + '/graphql/query',
       {
         timeout: 60000
@@ -159,7 +159,7 @@ export default class ImportUtil {
     console.log(`Importing ${existingPath} with Deal ${dealId}`);
     try {
       if (!options.dryRun) {
-        const response = await options.marketApiClient.call('OfflineDealWithData', [dealId, path.resolve(existingPath)]);
+        const response = await options.marketApiClient.call('BoostOfflineDealWithData', [dealId, path.resolve(existingPath)]);
         if (response.error) {
           throw response.error;
         }

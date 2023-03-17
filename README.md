@@ -5,8 +5,7 @@ Automatically import deals to boost for Filecoin storage provider
 ![build workflow](https://github.com/tech-greedy/singularity-import/actions/workflows/node.js.yml/badge.svg)
 [![npm version](https://badge.fury.io/js/@techgreedy%2Fsingularity-import.svg)](https://badge.fury.io/js/@techgreedy%2Fsingularity-import)
 
-
-### Prerequisite
+## Prerequisite
 
 ```shell
 # Install nvm (https://github.com/nvm-sh/nvm#install--update-script)
@@ -16,10 +15,14 @@ source ~/.bashrc
 nvm install 18
 ```
 
-### Install globally from npm
+## Install globally from npm
 
 ```shell
 npm i -g @techgreedy/singularity-import
 ```
 
-### Usage
+## Usage
+
+```shell
+singularity-import -h
+```

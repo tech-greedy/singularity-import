@@ -116,7 +116,7 @@ export default class ImportUtil {
         } catch (e) {
           console.error(e);
         }
-        await sleep(options.intervalSeconds * 1000);
+        await sleep(60 * 1000);
       }
     }
   }

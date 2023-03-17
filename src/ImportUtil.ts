@@ -219,6 +219,7 @@ export default class ImportUtil {
       if (existingPath) {
         try {
           await ImportUtil.importDeal(existingPath, deal.ID, options);
+          await sleep(options.intervalSeconds * 1000);
         } catch (e) {
           console.error(`Failed to import ${existingPath} for deal ${deal.ID}.`, e);
           ImportUtil.knownBadDeals.add(deal.ID);

@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/tech-greedy/singularity-import",
   "devDependencies": {
+    "@types/commander": "^2.12.2",
+    "@types/fs-extra": "^11.0.1",
     "@types/node": "^18.15.3",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
@@ -44,6 +46,15 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "@types/async-retry": "^1.4.5",
+    "async-retry": "^1.3.3",
+    "axios": "^1.3.4",
+    "commander": "^10.0.0",
+    "fs-extra": "^11.1.0",
+    "graphql-request": "^5.2.0",
+    "multipart-download": "^1.2.5",
+    "parse-duration": "^1.0.3",
+    "semaphore-async-await": "^1.5.1"
   },
   "author": "Xinan Xu",
   "files": [

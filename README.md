@@ -20,5 +20,4 @@ nvm install 18
 
 ```shell
 npm i -g @techgreedy/singularity-import
-singularity-import -h
 ```

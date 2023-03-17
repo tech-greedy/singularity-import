@@ -32,6 +32,15 @@ export default class ImportUtil {
     });
   }
 
+  private static parseDuration (duration: string): number {
+    if (isNaN(Number(duration))) {
+      // @ts-ignore
+      return parse(duration, 's')
+    } else {
+      return Number(duration);
+    }
+  }
+
   private static validateImportOptions (options: ImportOptions): ImportOptions {
     console.log(options);
     if (!process.env.MARKETS_API_INFO ||
@@ -49,13 +58,13 @@ export default class ImportUtil {
 
     if (options.since) {
       // @ts-ignore
-      options.sinceSeconds = parse(options.since, 's');
+      options.sinceSeconds = ImportUtil.parseDuration(options.since);
     } else {
       options.sinceSeconds = 30 * 86400;
     }
 
     // @ts-ignore
-    options.sealingDurationSeconds = parse(options.sealingDuration, 's');
+    options.sealingDurationSeconds = ImportUtil.parseDuration(options.sealingDuration);
     if (options.sealingDurationSeconds < 4 * 3600) {
       ImportUtil.throwError('Sealing duration must be at least 4 hours.');
     }
@@ -69,7 +78,7 @@ export default class ImportUtil {
     }
 
     // @ts-ignore
-    options.intervalSeconds = parse(options.interval, 's');
+    options.intervalSeconds = ImportUtil.parseDuration(options.interval);
     if (options.intervalSeconds < 0) {
       ImportUtil.throwError('Interval must be greater than 0.');
     }

@@ -23,3 +23,7 @@ npm i -g @techgreedy/singularity-import
 ```
 
 ### Usage
+
+```shell
+singularity-import -h
+```

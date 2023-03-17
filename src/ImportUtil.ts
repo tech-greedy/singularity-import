@@ -36,7 +36,7 @@ export default class ImportUtil {
     console.log(options);
     if (!process.env.MARKETS_API_INFO ||
       !process.env.BOOST_GRAPHQL_ENDPOINT) {
-      ImportUtil.throwError('Make sure you have all of the following environment variables set: LOTUS_MARKETS_PATH, MARKETS_API_INFO, BOOST_GRAPHQL_ENDPOINT');
+      ImportUtil.throwError('Make sure you have all of the following environment variables set: MARKETS_API_INFO, BOOST_GRAPHQL_ENDPOINT');
     }
 
     if (!options.client) {

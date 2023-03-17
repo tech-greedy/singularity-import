@@ -2,11 +2,11 @@
   "name": "@techgreedy/singularity-import",
   "version": "0.0.1",
   "description": "Automatically import deals to boost for Filecoin storage provider",
-  "main": "dist/src/singularity-import-boost.js",
-  "types": "dist/src/singularity-import-boost.d.ts",
+  "main": "dist/singularity-import-boost.js",
+  "types": "dist/singularity-import-boost.d.ts",
   "scripts": {
     "build": "tsc",
-    "postbuild": "chmod +x dist/src/singularity-import-boost.js",
+    "postbuild": "chmod +x dist/singularity-import-boost.js",
     "start": "ts-node-esm src/singularity-import-boost.ts",
     "lint": "eslint --ext ts --fix src/",
     "lint:nofix": "eslint --ext ts src/",
@@ -61,6 +61,6 @@
     "dist"
   ],
   "bin": {
-    "singularity-import-boost": "dist/src/singularity-import-boost.js"
+    "singularity-import-boost": "dist/singularity-import-boost.js"
   }
 }

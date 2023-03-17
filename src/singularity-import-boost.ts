@@ -1,14 +1,11 @@
 #!/usr/bin/env node
 
-import packageJson from '../package.json' assert { type: 'json' };
 import { Command } from 'commander';
 import ImportUtil from "./ImportUtil.js";
 import {ImportOptions} from "./Types.js";
 
-const version = packageJson.version;
 const program = new Command();
 program.name('singularity-import-boost')
-  .version(version)
   .description('A tool to automatically import deals to boost');
 
 program.option('-c, --client <addresses...>', 'List of client addresses to filter the deal proposals')

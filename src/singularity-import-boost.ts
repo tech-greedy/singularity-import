@@ -41,7 +41,7 @@ program.addHelpText('after', `
 
 Environment Variables:
   Make sure you have one of the following environment variables set:
-    - MARKETS_API_INFO, i.e. eyJxxx:/ip4/127.0.0.1/tcp/1289/http"
+    - MARKETS_API_INFO, i.e. eyJxxx:/ip4/127.0.0.1/tcp/1289/http
     - BOOST_GRAPHQL_ENDPOINT, i.e. http://127.0.0.1:8080
 
 Example Usage:

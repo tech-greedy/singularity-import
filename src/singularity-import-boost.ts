@@ -46,10 +46,10 @@ Environment Variables:
 
 Example Usage:
   - Import all deals continuously one after another:
-    $ singularity-import -p /path/to/car -i 0 -l
+    $ singularity-import-boost -p /path/to/car -i 0 -l
   - Import one deal every 20 minutes with multiple paths
-    $ singularity-import -p /path1/to/car -p /path2/to/car -i 20m -l
+    $ singularity-import-boost -p /path1/to/car -p /path2/to/car -i 20m -l
   - Import deals from a specific client and the file can be downloaded from their HTTP server. 
-    $ singularity-import -c f1xxxx -u https://www.download.org/{pieceCid}.car -o ./downloads -i 0 -l
+    $ singularity-import-boost -c f1xxxx -u https://www.download.org/{pieceCid}.car -o ./downloads -i 0 -l
 `);
 program.parse();

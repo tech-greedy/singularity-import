@@ -16,6 +16,8 @@ export interface ImportOptions {
   intervalSeconds: number,
   downloadConcurrency: number,
   maxPc1: number,
+  maxPotentialPc1: number,
+  reverse: boolean,
   dryRun: boolean,
   loop: boolean,
   minerApiClient: JsonRpcClient
@@ -33,4 +35,7 @@ export interface BoostDeal {
     n: string
   },
   DealDataRoot: string
+  PieceSize: {
+    n: string
+  }
 }

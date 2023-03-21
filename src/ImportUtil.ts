@@ -175,7 +175,7 @@ export default class ImportUtil {
     {
       deals(limit: 10000) {
         deals {
-          ID PieceCid CreatedAt ClientAddress Message StartEpoch DealDataRoot
+          ID PieceCid CreatedAt ClientAddress Message StartEpoch DealDataRoot PieceSize
         }
       }
     }`;
@@ -184,9 +184,34 @@ export default class ImportUtil {
   }
 
   private static async startImport (options: ImportOptions) {
+    const s32g = 32 * 1024 * 1024 * 1024;
     console.log('Fetching deals from Boost Markets...');
-    const deals = await ImportUtil.getDeals(options);
+    let deals = await ImportUtil.getDeals(options);
+    if (options.reverse) {
+      deals = deals.reverse();
+    }
+    let pc1 = 0;
+    let potentialPc1 = 0;
     for (const deal of deals) {
+      const pieceSize = Number(deal.PieceSize.n);
+      if (deal.Message === 'Sealer: PreCommit1') {
+        potentialPc1 += pieceSize;
+        pc1 += pieceSize;
+      } else if (deal.Message === 'Ready to Publish' ||
+        deal.Message === 'Awaiting Publish Confirmation' ||
+      deal.Message === 'Adding to Sector') {
+        potentialPc1 += pieceSize;
+      }
+    }
+    if (options.maxPc1 > 0 && pc1 / s32g >= options.maxPc1) {
+      console.log(`Skipping import because ${pc1 / s32g} PC1 are running - max: ${options.maxPc1}.`);
+      return;
+    }
+    for (const deal of deals) {
+      if (options.maxPotentialPc1 > 0 && potentialPc1 / s32g >= options.maxPotentialPc1) {
+        console.log(`Skipping import because ${potentialPc1 / s32g} PC1 are potentially running - max: ${options.maxPotentialPc1}.`);
+        return;
+      }
       if (deal.Message !== 'Awaiting Offline Data Import') {
         continue;
       }
@@ -227,6 +252,7 @@ export default class ImportUtil {
       if (existingPath) {
         try {
           await ImportUtil.importDeal(existingPath, deal.ID, options);
+          potentialPc1 += Number(deal.PieceSize.n);
           await sleep(options.intervalSeconds * 1000);
         } catch (e) {
           console.error(`[${deal.ID}] Failed to import ${existingPath}.`, e);

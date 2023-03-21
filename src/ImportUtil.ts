@@ -155,7 +155,7 @@ export default class ImportUtil {
     existingPath: string,
     dealId: string,
     options: ImportOptions) {
-    console.log(`[${dealId} Importing ${existingPath}`);
+    console.log(`[${dealId}] Importing ${existingPath}`);
     try {
       if (!options.dryRun) {
         const response = await options.marketApiClient.call('BoostOfflineDealWithData', [dealId, path.resolve(existingPath)]);

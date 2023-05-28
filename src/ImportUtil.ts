@@ -216,7 +216,7 @@ export default class ImportUtil {
         return;
       }
       if (options.pendingCommp > 0 && pendingCommp >= options.pendingCommp) {
-        console.log(`Skipping import because ${pendingCommp} Deals are waiting Commp- max: ${options.pendingCommp}.`);
+        console.log(`Skipping import because ${pendingCommp} Deals are Verifying Commp - max: ${options.pendingCommp}.`);
         return;
       }
       if (deal.Message !== 'Awaiting Offline Data Import') {

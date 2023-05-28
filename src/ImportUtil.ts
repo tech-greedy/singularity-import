@@ -203,7 +203,7 @@ export default class ImportUtil {
       deal.Message === 'Adding to Sector') {
         potentialPc1 += pieceSize;
       } else if (deal.Message === 'Verifying Commp') {
-        pendingCommp += pieceSize;
+        pendingCommp += 1;
       }
     }
     if (options.maxPc1 > 0 && pc1 / s32g >= options.maxPc1) {
@@ -215,8 +215,8 @@ export default class ImportUtil {
         console.log(`Skipping import because ${potentialPc1 / s32g} PC1 are potentially running - max: ${options.maxPotentialPc1}.`);
         return;
       }
-      if (options.pendingCommp > 0 && pendingCommp / s32g >= options.pendingCommp) {
-        console.log(`Skipping import because ${pendingCommp / s32g} Deals are waiting Commp- max: ${options.pendingCommp}.`);
+      if (options.pendingCommp > 0 && pendingCommp >= options.pendingCommp) {
+        console.log(`Skipping import because ${pendingCommp} Deals are waiting Commp- max: ${options.pendingCommp}.`);
         return;
       }
       if (deal.Message !== 'Awaiting Offline Data Import') {

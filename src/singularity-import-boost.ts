@@ -36,7 +36,7 @@ program.option('-c, --client <addresses...>', 'List of client addresses to filte
     'The maximum number of potential PC1s to run concurrently, the difference between this and --max-pc1 is, ' +
     'this includes all deals that will become PC1 shortly, including AP, deals pending publishing and being published. ' +
     '[Hack] For 64G miner, this value needs to be doubled.', Number, 0)
-  .option('-vc, --pending-commp <max_commp>', 'the maximum number of deals waiting for commp to run', Number, 0)
+  .option('-vc, --pending-commp <max_commp>', 'The maximum number of deals waiting in the Verifying Commp State', Number, 0)
   .option('-r, --reverse', 'Import deals in reverse order, i.e. from the oldest to the newest', false)
   .option('-d, --dry-run', 'Do not import deals, just print the deals that would be imported or downloaded', false)
   .option('-l, --loop', 'Keep monitoring the incoming deals and perform the import indefinitely', false)

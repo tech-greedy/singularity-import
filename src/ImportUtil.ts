@@ -192,6 +192,7 @@ export default class ImportUtil {
     }
     let pc1 = 0;
     let potentialPc1 = 0;
+    let pendingCompp = 0;
     for (const deal of deals) {
       const pieceSize = Number(deal.PieceSize.n);
       if (deal.Message === 'Sealer: PreCommit1') {
@@ -201,6 +202,8 @@ export default class ImportUtil {
         deal.Message === 'Awaiting Publish Confirmation' ||
       deal.Message === 'Adding to Sector') {
         potentialPc1 += pieceSize;
+      } else if (deal.Message === 'Verifying Commp') {
+        pendingCompp += pieceSize;
       }
     }
     if (options.maxPc1 > 0 && pc1 / s32g >= options.maxPc1) {
@@ -210,6 +213,10 @@ export default class ImportUtil {
     for (const deal of deals) {
       if (options.maxPotentialPc1 > 0 && potentialPc1 / s32g >= options.maxPotentialPc1) {
         console.log(`Skipping import because ${potentialPc1 / s32g} PC1 are potentially running - max: ${options.maxPotentialPc1}.`);
+        return;
+      }
+      if (options.pendingCompp > 0 && pendingCompp / s32g >= options.pendingCompp) {
+        console.log(`Skipping import because ${pendingCompp / s32g} Deals are waiting Commp- max: ${options.pendingCompp}.`);
         return;
       }
       if (deal.Message !== 'Awaiting Offline Data Import') {

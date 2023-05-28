@@ -17,6 +17,7 @@ export interface ImportOptions {
   downloadConcurrency: number,
   maxPc1: number,
   maxPotentialPc1: number,
+  pendingCompp: number,
   reverse: boolean,
   dryRun: boolean,
   loop: boolean,
